@@ -5,8 +5,14 @@
  - Rasperberry PI
 
 # Docker 
+----
+### Install Docker
+```
+$ uname -r  查看内核版本
+$ wget -qO- https://get.docker.com/ | sh  
+```
 
-
+----
 
 # Etherum 
 
