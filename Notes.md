@@ -72,6 +72,7 @@ $ docker swarm leave --force
 - docker rm $(docker ps -a -q)   删除所有已经停止的容器
 - docker rmi $(docker images -q -f dangling=true)  删除所有未打 dangling 标签的镜像
 - docker rmi $(docker images -q)   删除所有镜像
+- docker rmi --force $(docker images -q) 强制删除所有镜像
 - docker rmi --force $(docker images | grep doss-api | awk '{print $3}') 强制删除镜像名称中包含“doss-api”的镜像
 
 ----
