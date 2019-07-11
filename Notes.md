@@ -79,6 +79,50 @@ $ docker swarm leave --force
 
 # Etherum 
 
+### docker plus Etherum
+```
+$ docker pull ethereum/client-go
+$ docker run -d --name eth-ropsten-node -v          HOME/geth/ropsten:/root \
+  -p 8545:8545 -p 30303:30303 \
+  ethereum/client-go \
+  --testnet \
+  --syncmode "fast" \
+  --cache=1024
+ $ docker exec -it eth-ropsten-node geth attach ipc:/root/.ethereum/testnet/geth.ipc 查看区块同步情况
+ $ eth 查看支持的function
+ $ eth.getBlock(99)
+```
+稍微說明一下這段指令：
+- run：執行一個新的 Container
+- -d：在背景執行 Container 並且列印出 Container 的 ID
+- --name eth-ropsten-node：Container 的名稱
+- -v：綁定 Volume 的位置，$HOME/get/ropsten 是本機端的目錄，對映到 Container 的 root 目錄
+- -p 8545:8545 -p 30303:30303：要 expose 的 port
+- ethereum/client-go：指定映像檔名稱，使用我們剛剛拉取回來的映像檔
+- --testnet、--syncmode "fast"、--cache=1024：當容器起來後，會執行 ENTRYPOINT 的指令，可以參考上面的 Dockerfile
+- 使用測試鏈的資料，加上 --testnet（使用 Ropsten 測試鏈），預設會同步主鏈
+- 設定同步模式：--syncmode "fast"（模式有： fast、full、light）
+- 設定區塊的 cache 大小為 1024（預設就是為 1024，可以省略不打）
+
+
+### build private etherum blockchain
+```
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Python-Java-Go-NodeJS-Solidity 
 ## Python 
