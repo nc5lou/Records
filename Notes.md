@@ -105,11 +105,53 @@ $ docker run -d --name eth-ropsten-node -v          HOME/geth/ropsten:/root \
 - 設定區塊的 cache 大小為 1024（預設就是為 1024，可以省略不打）
 
 
-### build private etherum blockchain
-```
+### build private etherum blockchain -- 以太坊私有链搭
 
-
+-  创建目录 ~/works/block-chain/ethereum
+-  在 ethereum 目录下编写 start-ethereum.sh 文件内容如下
 ```
+$ docker stop ethereum-node
+$ docker rm ethereum-node
+$ docker run -d --name ethereum-node -v /home/linshan/works/block-chain/ethereum:/root \
+           -p 8545:8545 -p 30303:30303 -p 8200:8200\
+           ethereum/client-go
+$ docker exec -it ethereum-node /bin/sh
+```
+- 接下来创建创世区块
+    在 ethereum 目录下编写 genesis.json 文件内容如下
+```
+{
+"config": {
+                "chainId": 622 ,
+                "homesteadBlock": 0,
+                "eip155Block": 0,
+                "eip158Block": 0
+        },
+        "coinbase" : "0x0000000000000000000000000000000000000000",
+        "difficulty" : "200",
+        "extraData" : "",
+        "gasLimit" : "0xffffffff",
+        "nonce" : "0x0000000000000042",
+        "mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "timestamp" : "0x00",
+        "alloc": { }
+}
+```
+创世区块个字段含义详见[官方文档](https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fethereum%2Fgo-ethereum)
+
+- 启动以太坊docker容器
+···
+$ sudo ./start-ethereum.sh
+$ ls
+$ cd /root/
+$ geth --datadir ./data init ./genesis.json  初始化geth，data用来存放区块数据
+$ geth --datadir ./data --networkid 622 --port 8200 --rpc  --rpcaddr 0.0.0.0  --rpccorsdomain "*" --rpcport 8545 --nodiscover console
+   geth 的参数参看[以太坊客户端Geth命令用法-参数详解](https://link.jianshu.com/?t=https%3A%2F%2Fwww.cnblogs.com%2Ftinyxiong%2Fp%2F7918706.html)
+···
+具体参考网址[简书](https://www.jianshu.com/p/9b9d76cc58ff)
+[博客](https://www.cnblogs.com/jackluo/p/8513880.html)
+[以太坊私有链搭建指南](https://g2ex.github.io/2017/09/12/ethereum-guidance/)
 
 
 
