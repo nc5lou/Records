@@ -160,6 +160,13 @@ $ eth.accounts      #查看账户地址
 $ eth.getBalance(eth.accounts[0])  #查看账户余额
 $ miner.start(1)        #启动挖矿
 $ miner.stop()          #停止挖矿
+$ personal.unlockAccount(eth.accounts[0]) #解锁账户
+$ amount = web3.toWei(5,'ether')
+$ eth.sendTransaction({from:eth.accounts[0],to:eth.accounts[1],value:amount})
+$ txpool.status  #查看本地交易池中有一个待确认的交易
+$ eth.getBlock("pending",true).transactions #查看当前待确认交易
+$ miner.start(1);admin.sleepBlocks(1);miner.stop();
+$ web3.fromWei(eth.getBalance(eth.accounts[1]),'ether')  # 新区块挖出后，挖矿结束，查看账户 1 的余额
 ···
 
 
