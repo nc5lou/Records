@@ -168,9 +168,49 @@ $ eth.getBlock("pending",true).transactions #查看当前待确认交易
 $ miner.start(1);admin.sleepBlocks(1);miner.stop();
 $ web3.fromWei(eth.getBalance(eth.accounts[1]),'ether')  # 新区块挖出后，挖矿结束，查看账户 1 的余额
 $ eth.blockNumber  # 查看当前区块总数
+$ eth.getTransaction("Transaction_ID")
 ···
 
 
+### 创建和编译智能合约
+新建一个 Solidity 智能合约文件，命名为 testContract.sol，该合约包含一个方法 multiply()，将输入的两个数相乘后输出：
+```
+pragma solidity ^0.4.0;
+contract TestContract
+{
+    function multiply(uint a, uint b) returns (uint)
+    {
+        return a * b;
+    }
+}
+```
+- 放入 http://remix.ethereum.org 网页编译，拿到ABI和Bytecode
+- 回到 Geth 的控制台，用变量 code 和 abi 记录上面两个值，注意在 code 前加上 0x 前缀：
+- \> code = "0x6060604052341561000f57600080fd5b5b60b48061001e600
+- \> abi = [{"constant":false,"inputs":[{"name":"a","type":"uint256"},{"name....
+
+
+### 部署智能合约
+- 这里使用账户 0 来部署合约，首先解锁账户：
+````
+\> personal.unlockAccount(eth.accounts[0])
+\> myContract = eth.contract(abi)
+\> contract = myContract.new({from:eth.accounts[0],data:code,gas:1000000})
+  此时如果没有挖矿，用 txpool.status 命令可以看到本地交易池中有一个待确认的交易。使用下面的命令查看当前待确认的交易：
+````
+
+### 调用智能合约
+- 使用以下命令发送交易，sendTransaction 方法的前几个参数应该与合约中 multiply 方法的输入参数对应。这种情况下，交易会通过挖矿记录到区块链中：
+- \> contract.multiply(2, 4, {from:eth.accounts[0]})
+
+
+- ABI | Application Binary Interface，应用二进制接口 | 其中指定了合约接口，包括可调用的合约方法、变量、事件等。
+- DApp | Decentralized App，去中心化的应用程序 | 基于智能合约的应用称为去中心化的应用程序。
+- EVM | Ethereum Virtual Machine，以太坊虚拟机 | 以太坊智能合约的运行环境。
+- Gas | （消耗的）汽油 | 在以太坊上发起交易、部署合约和调用合约都要消耗一定量的以太币，这些消耗的- 以太币称为 Gas。
+- Geth | - | 以太坊客户端 go-ethereum，使用 Go 语言编写，是最常用的以太坊客户端之一。
+- Solidity | - | 以太坊智能合约的一种编程语言，类似 JavaScript。
+- Remix IDE | https://remix.ethereum.org | 基于浏览器的 Solidity 集成开发环境，在浏览器中编写和调试智能合约。
 
 
 
