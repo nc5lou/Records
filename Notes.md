@@ -196,6 +196,10 @@ contract TestContract
 \> personal.unlockAccount(eth.accounts[0])
 \> myContract = eth.contract(abi)
 \> contract = myContract.new({from:eth.accounts[0],data:code,gas:1000000})
+\> 记住 Transaction_ID
+\> eth.getTransactionReceipt("Transaction_ID")查看 smart contract的地址,  注意“contractAddress”
+\> samplecontract=myContract.at("smart contract地址")
+\> samplecontract.multiply.call(3,5) 即可看到结果15， 但是这种调用属于本地调用，没有记在链上
   此时如果没有挖矿，用 txpool.status 命令可以看到本地交易池中有一个待确认的交易。使用下面的命令查看当前待确认的交易：
 ````
 
