@@ -112,7 +112,7 @@ $ docker run -d --name eth-ropsten-node -v          HOME/geth/ropsten:/root \
 ```
 $ docker stop ethereum-node
 $ docker rm ethereum-node
-$ docker run -d --name ethereum-node -v /home/linshan/works/block-chain/ethereum:/root \
+$ docker run -d --name ethereum-node -v ~/learning/etherum/block-chain/ethereum:/root \
            -p 8545:8545 -p 30303:30303 -p 8200:8200\
            ethereum/client-go:v1.8.0
 $ docker exec -it ethereum-node /bin/sh
