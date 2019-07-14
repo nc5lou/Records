@@ -154,6 +154,13 @@ $ geth --datadir ./data --networkid 622 --port 8200 --rpc  --rpcaddr 0.0.0.0  --
 [以太坊私有链搭建指南](https://g2ex.github.io/2017/09/12/ethereum-guidance/)
 
 
+···
+$ personal.newAccount()  # 创建账户
+$ eth.accounts      #查看账户地址
+$ eth.getBalance(eth.accounts[0])  #查看账户余额
+$ miner.start(1)        #启动挖矿
+$ miner.stop()          #停止挖矿
+···
 
 
 
