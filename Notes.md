@@ -81,7 +81,7 @@ $ docker swarm leave --force
 
 ### docker plus Etherum
 ```
-$ docker pull ethereum/client-go
+$ docker pull ethereum/client-go:v1.8.27
 $ docker run -d --name eth-ropsten-node -v          HOME/geth/ropsten:/root \
   -p 8545:8545 -p 30303:30303 \
   ethereum/client-go \
