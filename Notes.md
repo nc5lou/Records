@@ -81,7 +81,7 @@ $ docker swarm leave --force
 
 ### docker plus Etherum
 ```
-$ docker pull ethereum/client-go:v1.8.27
+$ docker pull ethereum/client-go:v1.8.0
 $ docker run -d --name eth-ropsten-node -v          HOME/geth/ropsten:/root \
   -p 8545:8545 -p 30303:30303 \
   ethereum/client-go \
@@ -114,7 +114,7 @@ $ docker stop ethereum-node
 $ docker rm ethereum-node
 $ docker run -d --name ethereum-node -v /home/linshan/works/block-chain/ethereum:/root \
            -p 8545:8545 -p 30303:30303 -p 8200:8200\
-           ethereum/client-go
+           ethereum/client-go:v1.8.0
 $ docker exec -it ethereum-node /bin/sh
 ```
 - 接下来创建创世区块
