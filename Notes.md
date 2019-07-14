@@ -167,6 +167,7 @@ $ txpool.status  #查看本地交易池中有一个待确认的交易
 $ eth.getBlock("pending",true).transactions #查看当前待确认交易
 $ miner.start(1);admin.sleepBlocks(1);miner.stop();
 $ web3.fromWei(eth.getBalance(eth.accounts[1]),'ether')  # 新区块挖出后，挖矿结束，查看账户 1 的余额
+$ eth.blockNumber  # 查看当前区块总数
 ···
 
 
