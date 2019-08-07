@@ -217,9 +217,17 @@ contract TestContract
 - Remix IDE | https://remix.ethereum.org | 基于浏览器的 Solidity 集成开发环境，在浏览器中编写和调试智能合约。
 
 
+### Install the Ethereum Test Environment of Ganache-cli
 
-
-
+···
+$ sudo apt-get install nodejs
+$ sudo apt install nodejs-legacy
+$ sudo apt install npm
+$ sudo npm config set registry https://registry.npm.taobao.org
+$ sudo npm config list
+$ 安装更新版本的工具N，执行：sudo npm install n -g
+$ 跟新node版本，执行：sudo n stable 
+···
 
 
 
